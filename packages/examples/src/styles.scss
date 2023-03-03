@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #121212;
+    font-family: "Verdana";
+}
+
+input,
+button,
+textarea {
+    background-color: #303030;
+    border: none;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    color: white;
+}
+input,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+}
+input:focus,
+textarea:focus {
+    outline: dashed 1px #0bf4d4;
+}
+
+button {
+    background-color: #404040;
+    border: dashed 1px greenyellow;
+}
