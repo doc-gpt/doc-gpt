@@ -1,2 +1,5 @@
+import GptChatSDK from './lib/gpt-chat-sdk';
+
 export * from './lib/types';
-export * from './lib/gpt-chat-sdk';
+
+export default GptChatSDK;

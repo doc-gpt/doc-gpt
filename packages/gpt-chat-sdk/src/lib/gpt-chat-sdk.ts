@@ -32,7 +32,7 @@ import {
  *
  * For more informations about the api see [https://platform.openai.com/docs/api-reference/completions](https://platform.openai.com/docs/api-reference/completions)
  */
-class GptSDK {
+class GptChatSDK {
   /**
    * Instance configuration. (private)
    *
@@ -70,7 +70,7 @@ class GptSDK {
   }
 
   /**
-   * Make a Chat/Completion request and get a full response
+   * Make a /v1/chat/completion request and get a full response
    * @param messages The messages to sent in the request.
    * You can have messages with roles "system" | "user" | "assistant".
    * *Note: if you use `options.systemMessage`, all of the "system" messages from this list, will be ignored*
@@ -91,7 +91,7 @@ class GptSDK {
     if (
       options?.systemMessage ||
       (this._options.defaultSystemMessage &&
-        !messages.find((msg) => msg.role !== 'system'))
+        !messages.find((msg) => msg.role === 'system'))
     ) {
       // With systemMessage option in Chat call, it's override an eventual system messages from messages
 
@@ -180,4 +180,4 @@ class GptSDK {
   }
 }
 
-export default GptSDK;
+export default GptChatSDK;

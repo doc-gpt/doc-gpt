@@ -1,5 +1,5 @@
 /**
- * The configuration for the GptSDK instance.
+ * The configuration for the GptChatSDK instance.
  * *If you don't have an OpenAI Api Key, see https://platform.openai.com/account/api-keys to find or create yours*
  *
  * **apiKey**: Your OpenAI api key (required)
@@ -123,7 +123,7 @@ export interface GptMessage {
 }
 
 /**
- *
+ * /v1/chat/completion response structure
  */
 export interface GptResponse {
   id: string;
@@ -135,10 +135,7 @@ export interface GptResponse {
 
 export interface GptResponseChoices {
   index: number;
-  message: {
-    role: string;
-    content: string;
-  };
+  message: GptMessage;
   finish_reason: string;
 }
 
