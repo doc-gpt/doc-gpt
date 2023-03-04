@@ -1,6 +1,6 @@
 # GPT Chat SDK
 
-#### This is an _unofficial_ SDK for OpenAI Chat Api
+#### This is an _unofficial_ SDK for the OpenAI Chat Api
 
 This library is made for ts/js developers who want to use the **OpenAI's Api** `/v1/chat/completion` with ease.
 
