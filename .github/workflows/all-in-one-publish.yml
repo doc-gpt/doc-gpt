@@ -43,7 +43,7 @@ jobs:
       - name: Verify version change
         id: version-check
         run: |
-          if [[ $(git diff --name-only HEAD HEAD~ | grep -q 'package.json' && jq -r '.version' package.json) == $(git show HEAD:package.json | jq -r '.version') ]]; then
+          if [[ $(git diff --name-only $(git rev-parse HEAD) $(git rev-parse HEAD~) | grep -q 'package.json' && jq -r '.version' package.json) == $(git show HEAD:package.json | jq -r '.version') ]]; then
             echo "Version has changed"
             echo "CHANGED=true" >> $GITHUB_ENV
           else
