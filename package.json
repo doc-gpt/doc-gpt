@@ -2,7 +2,10 @@
   "name": "gpt-chat-sdk",
   "version": "1.0.0",
   "license": "GPL",
-  "scripts": {},
+  "scripts": {
+    "prepublish": "cd ./packages/gpt-chat-sdk && npm run build",
+    "publish": "npm run prepublish && cd ./dist/packages/gpt-chat-sdk && npm publish"
+  },
   "private": true,
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",

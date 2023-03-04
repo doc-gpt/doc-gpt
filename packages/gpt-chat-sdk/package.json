@@ -1,8 +1,13 @@
 {
-  "name": "gpt-chat-sdk",
   "displayName": "GPT Chat SDK",
-  "description": "Unofficial typed SDK for interacting with the OpenAI Chat Api",
   "version": "1.0.0",
+  "name": "gpt-chat-sdk",
+  "description": "Unofficial typed SDK for interacting with the OpenAI Chat Api",
+  "scripts": {
+    "copy_docs_from_root": "cp ../../README.md ./",
+    "copy_docs_from_root_to_dist": "cp ../../LICENCE ../../dist/packages/gpt-chat-sdk;cp ../../COPYRIGHT ../../dist/packages/gpt-chat-sdk;cp ../../THIRD_PARTY_LICENCES ../../dist/packages/gpt-chat-sdk;",
+    "build": "npm run copy_docs_from_root;cd ../../ && nx run gpt-chat-sdk:build; cd packages/gpt-chat-sdk && npm run copy_docs_from_root_to_dist"
+  },
   "type": "commonjs",
   "repository": "https://github.com/doc-packages/gpt-sdk",
   "license": "GPL",
