@@ -40,35 +40,19 @@ jobs:
           cd ./packages/gpt-chat-sdk
           npm run copy_docs_from_root_to_dist
 
-      - name: Verify version change
-        id: version-check
-        run: |
-          if [[ $(git diff --name-only $(git rev-parse HEAD) $(git rev-parse HEAD~) | grep -q 'package.json' && jq -r '.version' package.json) == $(git show HEAD:package.json | jq -r '.version') ]]; then
-            echo "Version has changed"
-            echo "CHANGED=true" >> $GITHUB_ENV
-          else
-            echo "Version has not changed"
-            echo "CHANGED=false" >> $GITHUB_ENV
-          fi
-        env:
-          CHANGED: ${{ steps.version-check.outputs.changed }}
-
-
-      - name: Publish to NPM
-        if: steps.version-check.outputs.changed == 'true'
+      - name: Publish to NPM (if needed)
         run: |
           cd ./dist/packages/gpt-chat-sdk
+          touch .npmrc 
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}">.npmrc
           npm publish
+        continue-on-error: true
 
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-
-      - name: Publish to GitHub Packages
-        if: steps.version-check.outputs.changed == 'true'
+      - name: Publish to GitHub Packages (if needed)
         run: |
           cd ./dist/packages/gpt-chat-sdk
-          echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> .npmrc
+          jq '.name = "@doc-packages/gpt-chat-sdk"' package.json > temp.json
+          mv temp.json package.json
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.GH_TOKEN}}" >> .npmrc
           npm publish --registry=https://npm.pkg.github.com/
-
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        continue-on-error: true
