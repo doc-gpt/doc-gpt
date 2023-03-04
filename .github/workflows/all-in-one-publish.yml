@@ -16,19 +16,29 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm ci
 
       - name: Lint
-        run: nx lint gpt-chat-sdk
+        run: nx run gpt-chat-sdk:lint
 
       - name: Test
-        run: nx test gpt-chat-sdk
+        run: nx run gpt-chat-sdk:test
+
+      - name: Copy README from root to library
+        run: |
+          cd ./packages/gpt-chat-sdk
+          npm run copy_docs_from_root
 
       - name: Build
         run: nx build gpt-chat-sdk
+
+      - name: Copy DOCS files from root to dist
+        run: |
+          cd ./packages/gpt-chat-sdk
+          npm run copy_docs_from_root_to_dist
 
       - name: Publish to NPM
         run: |
