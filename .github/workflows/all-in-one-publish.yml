@@ -40,7 +40,18 @@ jobs:
           cd ./packages/gpt-chat-sdk
           npm run copy_docs_from_root_to_dist
 
+      - name: Verify version change
+        id: version-check
+        run: |
+          if [[ $(git diff --name-only HEAD HEAD~ | grep -q 'package.json' && jq -r '.version' package.json) == $(git show HEAD:package.json | jq -r '.version') ]]; then
+            echo "::set-output name=changed::false"
+          else
+            echo "::set-output name=changed::true"
+          fi
+
+
       - name: Publish to NPM
+        if: steps.version-check.outputs.changed == 'true'
         run: |
           cd ./dist/packages/gpt-chat-sdk
           npm publish
@@ -49,6 +60,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
 
       - name: Publish to GitHub Packages
+        if: steps.version-check.outputs.changed == 'true'
         run: |
           cd ./dist/packages/gpt-chat-sdk
           echo "//npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}" >> .npmrc
