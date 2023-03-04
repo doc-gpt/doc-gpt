@@ -1,0 +1,13 @@
+{
+  "name": "gpt-chat-sdk",
+  "displayName": "GPT Chat SDK",
+  "description": "Unofficial typed SDK for interacting with the OpenAI Chat Api",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "repository": "https://github.com/doc-packages/gpt-sdk",
+  "license": "GPL",
+  "author": "Francesco Bellini",
+  "contributors": [
+    "Francesco Bellini (@doc-packages)"
+  ]
+}

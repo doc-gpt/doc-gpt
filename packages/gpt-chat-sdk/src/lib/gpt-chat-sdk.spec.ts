@@ -1,7 +1,7 @@
-import { GptInvalidApiKey, GptMissingOptions } from './errors';
-import GptSDK from './openai-gpt-sdk';
+import { GptInvalidApiKey, GptMissingOptions } from './messages/errors';
+import GptSDK from './gpt-chat-sdk';
 
-describe('openaiGptSdk', () => {
+describe('GptSDK Class - Bad options', () => {
   it('Initialization without options should throw GptMissingOptions', () => {
     // Simulating pure js situation without typings so we can try pass no options
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,5 +40,17 @@ describe('openaiGptSdk', () => {
           apiKey: undefined as unknown as string, // force nullish value
         })
     ).toThrowError(errorMessageRegex);
+  });
+});
+
+describe('GptSDK Class - Good options', () => {
+  it('Initialization with minimal correct config', () => {
+    const apiKey = 'sk-fake-api-key';
+    expect(
+      () =>
+        new GptSDK({
+          apiKey,
+        })
+    );
   });
 });

@@ -3,4 +3,4 @@
  * https://platform.openai.com/docs/api-reference/chat
  */
 export const OpenAIChatCompletionApi =
-  "https://api.openai.com/v1/chat/completions";
+  'https://api.openai.com/v1/chat/completions';

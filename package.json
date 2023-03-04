@@ -1,7 +1,7 @@
 {
-  "name": "gpt-3.5-sdk",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "gpt-chat-sdk",
+  "version": "1.0.0",
+  "license": "GPL",
   "scripts": {},
   "private": true,
   "devDependencies": {
