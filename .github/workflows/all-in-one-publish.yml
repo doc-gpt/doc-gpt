@@ -22,10 +22,10 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: nx run gpt-chat-sdk:lint
+        run: npx nx run gpt-chat-sdk:lint
 
       - name: Test
-        run: nx run gpt-chat-sdk:test
+        run: npx nx run gpt-chat-sdk:test
 
       - name: Copy README from root to library
         run: |
@@ -33,7 +33,7 @@ jobs:
           npm run copy_docs_from_root
 
       - name: Build
-        run: nx build gpt-chat-sdk
+        run: npx nx build gpt-chat-sdk
 
       - name: Copy DOCS files from root to dist
         run: |
