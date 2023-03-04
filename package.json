@@ -1,6 +1,6 @@
 {
   "name": "gpt-chat-sdk",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "license": "GPL",
   "scripts": {
     "prepublish": "cd ./packages/gpt-chat-sdk && npm run build",

@@ -1,6 +1,6 @@
 {
   "displayName": "GPT Chat SDK",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "name": "gpt-chat-sdk",
   "description": "Unofficial typed SDK for interacting with the OpenAI Chat Api",
   "scripts": {
@@ -9,10 +9,14 @@
     "build": "npm run copy_docs_from_root;cd ../../ && nx run gpt-chat-sdk:build; cd packages/gpt-chat-sdk && npm run copy_docs_from_root_to_dist"
   },
   "type": "commonjs",
-  "repository": "https://github.com/doc-packages/gpt-sdk",
+  "repository": "https://github.com/doc-packages/gpt-chat-sdk",
   "license": "GPL",
   "author": "Francesco Bellini",
   "contributors": [
     "Francesco Bellini (@doc-packages)"
-  ]
+  ],
+  "keywords": ["chatgpt", "chatgpt-api", "gpt", "gpt-3.5-turbo", "openai", "openai-api", "gpt-3", "gpt-client", "gpt-sdk", "openai chat", "chat", "ai"],
+  "dependencies": {
+    "axios": "^1.3.4"
+  }
 }

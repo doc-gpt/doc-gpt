@@ -203,9 +203,9 @@ const model = GptModels['gpt-3.5-turbo-0301'];
 
 This library depends on `axios` library.
 
-[See axios-http website](https://axios-http.com/)
-[See axios on NPM](https://www.npmjs.com/package/axios)
-[See axios/axios repository](https://github.com/axios/axios)
+[See axios-http website](https://axios-http.com/)  
+[See axios on NPM](https://www.npmjs.com/package/axios)  
+[See axios/axios repository](https://github.com/axios/axios)  
 
 Take a look at the file [THIRD_PARTY_LICENCES](./THIRD_PARTY_LICENCES) for the full licences.
 

@@ -1,0 +1,15 @@
+# 1.0.2
+
+- Refactor README & package.json
+
+# 1.0.1
+
+ - Update repository reference in the package.json
+ - Add explicit axios dependency in the package.json so npm show it
+
+# 1.0.0
+
+Add the `GptChatSDK` instance with:
+- Chat method for non-stream request
+- SimpleChat method for getting first message content from non-stream request
+- Stream request are still todo
