@@ -44,10 +44,14 @@ jobs:
         id: version-check
         run: |
           if [[ $(git diff --name-only HEAD HEAD~ | grep -q 'package.json' && jq -r '.version' package.json) == $(git show HEAD:package.json | jq -r '.version') ]]; then
-            echo "::set-output name=changed::false"
+            echo "Version has changed"
+            echo "CHANGED=true" >> $GITHUB_ENV
           else
-            echo "::set-output name=changed::true"
+            echo "Version has not changed"
+            echo "CHANGED=false" >> $GITHUB_ENV
           fi
+        env:
+          CHANGED: ${{ steps.version-check.outputs.changed }}
 
 
       - name: Publish to NPM
