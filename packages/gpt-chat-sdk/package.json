@@ -1,6 +1,6 @@
 {
   "displayName": "GPT Chat SDK",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "gpt-chat-sdk",
   "description": "Unofficial typed SDK for interacting with the OpenAI Chat Api",
   "scripts": {

@@ -1,3 +1,7 @@
+# 1.0.3
+
+- Just a version change to run the new pipeline and make the first publish on github packages
+
 # 1.0.2
 
 - Refactor README & package.json
