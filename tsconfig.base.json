@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "gpt-chat-sdk": ["packages/gpt-chat-sdk/src/index.ts"]
+      "@gpt-chat-sdk": ["packages/gpt-chat-sdk/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
