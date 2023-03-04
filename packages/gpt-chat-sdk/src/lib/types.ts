@@ -3,16 +3,22 @@
  * *If you don't have an OpenAI Api Key, see https://platform.openai.com/account/api-keys to find or create yours*
  *
  * **apiKey**: Your OpenAI api key (required)
- *
- * **model**: The default model used by the instance (optional)
- * *(you can still override this in each single request)*.
- * By default it's used `gpt-3.5-turbo`.
- *
- * **chatDefaultOptions**: Setup the default chat options (optional)
  */
 export interface GptSDKOptions {
+  /** Your OpenAI api key (required) */
   apiKey: string;
+  /**
+   * The default model used by the instance (optional)
+   *(you can still override this in each single request)*.
+   * By default it's used `gpt-3.5-turbo`.
+   */
   defaultModel?: GptModel;
+  /** 
+   * Automatically set the first 'system' message sent in the request (if missing)
+   * Quoting the OpenAI docs:
+   * `the system message helps set the behavior of the assistant`
+   * *It's very powerfull, but it will count as tokens, so choose well and be aware :)*
+   */
   defaultSystemMessage?: string;
 }
 
