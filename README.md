@@ -75,7 +75,7 @@ const gpt = new GptChatSDK({
 // ...
 
 try {
-  // Get a full response from the api
+  // Get a the first message text from the api
   const message = await gpt.SimpleChat([
     {
       role: 'user',
@@ -96,7 +96,7 @@ This will setup a default first message sent to the api, with role "system" in o
 ```typescript
 const gpt = new GptChatSDK({
   apiKey: OPENAI_API_KEY,
-  defaultSystemMessage: system,
+  defaultSystemMessage: 'Your name is GptChatSDK. You are a helpful assistant.',
 });
 // Chat...
 ```
@@ -116,6 +116,32 @@ const gpt = new GptChatSDK({
 });
 // Chat...
 ```
+
+#### Chat Options
+```typescript
+interface GptChatOptions {
+  // Overrides the default model (default gpt-3.5-turbo or the one set in the instance options)
+  model?: GptModel;
+  // Override the default system message and remove any system message from the "messages"
+  systemMessage?: string;
+
+  // Api Options
+
+  temperature?: number;
+  top_p?: number;
+  n?: number;
+  stop?: string | string[];
+  max_tokens: number;
+  presence_penalty?: number;
+  frequency_penalty?: number;
+  logit_bias?: {
+    [key: string]: number;
+  };
+  user?: string;
+}
+```
+For the description of the properties, see the interface in `types.ts` or see [https://platform.openai.com/docs/api-reference/chat/create](https://platform.openai.com/docs/api-reference/chat/create).
+
 
 # Methods
 
