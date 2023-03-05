@@ -4,18 +4,50 @@
 
 This library is made for ts/js developers who want to use the **OpenAI's Api** `/v1/chat/completion` with ease.
 
-_For more informations about the underlay api, please refer to [OpenAI Chat Api Docs](https://platform.openai.com/docs/api-reference/chat/create)_
 
 > This project is created and mantained by @doc-packages.  
 > If you find a bug or have a suggestion, an Issue is very welcome!
 
-> Note. OpenAI Chat Api is still in beta, and may change very quickly.
-> If you notice some changes in the api that i've not implemented, please open an issue or propose a PR.
+_For more informations about the underlay api, please refer to [OpenAI Chat Api Docs](https://platform.openai.com/docs/api-reference/chat/create)_
+
+> Note: OpenAI Chat Api is still in beta, and may change very quickly.
+> If you notice some changes in the api, that i've not implemented, please open an issue or propose a PR.
+
+
+# Install
+
+The library is avaliable both on [NPM](https://www.npmjs.com/package/gpt-chat-sdk) and [GitHub Packages](https://github.com/doc-packages/gpt-chat-sdk/pkgs/npm/gpt-chat-sdk).
+
+### Install from NPM
+
+```
+npm i gpt-chat-sdk
+```
+
+### Install from GitHub Packages
+
+First of all, you need to add a `.npmrc` file, in the root of your project, with the following content:
+```
+@doc-packages:registry=https://npm.pkg.github.com
+```
+
+Then install the package (replace \<VERSION> with the version you need, or latest)
+```
+npm install @doc-packages/gpt-chat-sdk@<VERSION>
+```
 
 
 # Getting started
 
 `GptChatSDK` offers a simple api to interact with **OpenAI Chat Api**.
+
+First of all [install](#install) the library.
+
+Then you can start by importing the GptChatSDK with:
+```typescript
+import { GptChatSDK } from 'gpt-chat-sdk';
+```
+
 You just need to configure the instance and start chatting with the methods avaliable:
 
 - `Chat(messages, options)`
@@ -23,6 +55,8 @@ You just need to configure the instance and start chatting with the methods aval
 - Stream version of this methods are still to be done
 
 > Note: If you use a static api key, it's better to use an environment variable.
+
+For a simple example on a React app, see `App.tsx` from `/packages/examples` folder
 
 #### Basic usage example:
 
@@ -51,9 +85,6 @@ try {
   // Get the first message object
   const firstMessage = res.choices[0].message;
 
-  // For the full structure of the response, see the interface
-  // or the response example in the OpenAI docs at:
-  // https://platform.openai.com/docs/api-reference/chat/create
 } catch (err) {
   // Handle Api errors
 }
@@ -75,7 +106,7 @@ const gpt = new GptChatSDK({
 // ...
 
 try {
-  // Get a the first message text from the api
+  // Get the first choice message text from the api
   const message = await gpt.SimpleChat([
     {
       role: 'user',
@@ -89,10 +120,64 @@ try {
 }
 ```
 
+#### Advanced usage example:
+
+```typescript
+// Create the GptChatSDK instance with just the api key
+const gpt = new GptChatSDK({
+  apiKey: OPENAI_API_KEY,
+  defaultSystemMessage: 'You are ChatGPT and you are a helpfull assistant.', 
+});
+
+const previousMessages = [
+  {
+    role: 'user',
+    content: 'Who are you?'
+  },
+  {
+    role: 'assistant',
+    content: `I am ChatGPT, a helpful assistant designed to interact with people and provide assistance with various topics in a conversational manner. How can I assist you today?`
+  },
+]
+
+try {
+  // Get the choices generated (3 expected)
+  const { choices } = await gpt.Chat([
+    ...previousMessages,
+    {
+      role: 'user',
+      content: 'How can i install gpt-chat-sdk from npm?',
+    },
+  ], {
+    // Automatically override system role message
+    max_tokens: 512, // Limit the number of max tokens
+    stop: '\n\n', // Stopping when model produce '\n\n'
+    n: 3, // Number of choices the model will generate
+    user: userUid // for security. let OpenAI check for abuses from users
+  });
+
+  // Get all the content from the messages
+  const messages = choices.map(choice => choice.message.content);
+
+  console.log(messages);
+  // Expect something like
+  // [
+  //   'To install `gpt-chat-sdk`...', 
+  //   'To install the gpt-chat-sdk...',
+  //   'To install gpt-chat-sdk...'
+  // ]  
+    
+} catch (err) {
+  // Handle Api errors
+}
+```
+
+## SDK Utils
+
 #### Setting a default system message:
 
-This will setup a default first message sent to the api, with role "system" in order to guide the behaviour of the model.
-
+This will setup a default first message sent to the api, with role "system", in order to guide the behaviour of the model.
+_It's possibile to override this in the `options.systemMessage` of each single Chat request_
 ```typescript
 const gpt = new GptChatSDK({
   apiKey: OPENAI_API_KEY,
@@ -101,13 +186,13 @@ const gpt = new GptChatSDK({
 // Chat...
 ```
 
-> Note: This is added as first message only if the `messages` list has no system message
+> Note: This is added as first message only if the `messages` list has no system message (when calling the chat methods)
 
 #### Setting a default model:
 
 This will setup a default model to use for the requests.  
-Default is `gpt-3.5-turbo`.
-_It's possibile to override this in the `options` of each single Chat request_
+Default is `gpt-3.5-turbo`, *so if you need that one, you don't need to set this*.
+_It's possibile to override this in the `options.model` of each single Chat request_
 
 ```typescript
 const gpt = new GptChatSDK({
@@ -116,32 +201,6 @@ const gpt = new GptChatSDK({
 });
 // Chat...
 ```
-
-#### Chat Options
-```typescript
-interface GptChatOptions {
-  // Overrides the default model (default gpt-3.5-turbo or the one set in the instance options)
-  model?: GptModel;
-  // Override the default system message and remove any system message from the "messages"
-  systemMessage?: string;
-
-  // Api Options
-
-  temperature?: number;
-  top_p?: number;
-  n?: number;
-  stop?: string | string[];
-  max_tokens: number;
-  presence_penalty?: number;
-  frequency_penalty?: number;
-  logit_bias?: {
-    [key: string]: number;
-  };
-  user?: string;
-}
-```
-For the description of the properties, see the interface in `types.ts` or see [https://platform.openai.com/docs/api-reference/chat/create](https://platform.openai.com/docs/api-reference/chat/create).
-
 
 # Methods
 
@@ -168,13 +227,42 @@ For the description of the properties, see the interface in `types.ts` or see [h
 
 ## Types
 
-All the avaliable message roles
+
+#### Chat Options
+All the avaliable options in the chat methods:
+
+```typescript
+interface GptChatOptions {
+  // Overrides the default model (default gpt-3.5-turbo or the one set in the instance options)
+  model?: GptModel;
+  // Override the default system message and remove any system message from the "messages"
+  systemMessage?: string;
+
+  // Api Options
+
+  temperature?: number;
+  top_p?: number;
+  n?: number;
+  stop?: string | string[];
+  max_tokens: number;
+  presence_penalty?: number;
+  frequency_penalty?: number;
+  logit_bias?: {
+    [key: string]: number;
+  };
+  user?: string;
+}
+```
+For the description of the properties, see the interface in `types.ts` (which has comments from the docs) or see [https://platform.openai.com/docs/api-reference/chat/create](https://platform.openai.com/docs/api-reference/chat/create).
+
+
+All the avaliable message roles:
 ```ts
 // Message Roles
 type GptRole = 'system' | 'user' | 'assistant';
 ```
 
-Chat Message 
+Chat Message:
 ```ts
 // Chat Message
 interface GptMessage {
@@ -183,7 +271,7 @@ interface GptMessage {
 }
 ```
 
-Response
+Api Response:
 ```ts
 // OpenAI `/v1/chat/completion` api response
 interface GptResponse {
