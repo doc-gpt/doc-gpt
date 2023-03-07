@@ -1,6 +1,6 @@
-# GPT Chat SDK
+# Doc GPT - SDK
 
-#### This is an _unofficial_ SDK for the OpenAI Chat Api
+#### Typed SDKs for the OpenAI Apis
 
 This library is made for ts/js developers who want to use the **OpenAI's Api** `/v1/chat/completion` with ease.
 
@@ -16,12 +16,12 @@ _For more informations about the underlay api, please refer to [OpenAI Chat Api 
 
 # Install
 
-The library is avaliable both on [NPM](https://www.npmjs.com/package/gpt-chat-sdk) and [GitHub Packages](https://github.com/doc-packages/gpt-chat-sdk/pkgs/npm/gpt-chat-sdk).
+The library is avaliable both on [NPM](https://www.npmjs.com/package/doc-gpt/chat) and [GitHub Packages](https://github.com/doc-gpt/doc-gpt/pkgs/npm/@doc-gpt/chat).
 
 ### Install from NPM
 
 ```
-npm i gpt-chat-sdk
+npm i @doc-gpt/chat
 ```
 
 ### Install from GitHub Packages
@@ -33,19 +33,19 @@ First of all, you need to add a `.npmrc` file, in the root of your project, with
 
 Then install the package (replace \<VERSION> with the version you need, or latest)
 ```
-npm install @doc-packages/gpt-chat-sdk@<VERSION>
+npm install  @doc-gpt/chat@<VERSION>
 ```
 
 
 # Getting started
 
-`GptChatSDK` offers a simple api to interact with **OpenAI Chat Api**.
+`DocGptChat` offers a simple api to interact with **OpenAI Chat Api**.
 
 First of all [install](#install) the library.
 
-Then you can start by importing the GptChatSDK with:
+Then you can start by importing the DocGptChat with:
 ```typescript
-import { GptChatSDK } from 'gpt-chat-sdk';
+import { DocGptChat } from '@doc-gpt/chat';
 ```
 
 You just need to configure the instance and start chatting with the methods avaliable:
@@ -63,8 +63,8 @@ For a simple example on a React app, see `App.tsx` from `/packages/examples` fol
 If you just need the full response from the api, it's avaliable the `Chat` method.
 
 ```typescript
-// Create the GptChatSDK instance with just the api key
-const gpt = new GptChatSDK({
+// Create the DocGptChat instance with just the api key
+const gpt = new DocGptChat({
   apiKey: OPENAI_API_KEY,
 });
 
@@ -98,8 +98,8 @@ or the response example in the OpenAI docs at: [https://platform.openai.com/docs
 If you just need the first message content from the response, it's avaliable the `SimpleChat` method, which wraps `Chat` with the same parameters and returns the first message string.
 
 ```typescript
-// Create the GptChatSDK instance with just the api key
-const gpt = new GptChatSDK({
+// Create the DocGptChat instance with just the api key
+const gpt = new DocGptChat({
   apiKey: OPENAI_API_KEY,
 });
 
@@ -123,8 +123,8 @@ try {
 #### Advanced usage example:
 
 ```typescript
-// Create the GptChatSDK instance with just the api key
-const gpt = new GptChatSDK({
+// Create the DocGptChat instance with just the api key
+const gpt = new DocGptChat({
   apiKey: OPENAI_API_KEY,
   defaultSystemMessage: 'You are ChatGPT and you are a helpfull assistant.', 
 });
@@ -146,7 +146,7 @@ try {
     ...previousMessages,
     {
       role: 'user',
-      content: 'How can i install gpt-chat-sdk from npm?',
+      content: 'How can i install @doc-gpt/chat from npm?',
     },
   ], {
     // Automatically override system role message
@@ -162,9 +162,9 @@ try {
   console.log(messages);
   // Expect something like
   // [
-  //   'To install `gpt-chat-sdk`...', 
-  //   'To install the gpt-chat-sdk...',
-  //   'To install gpt-chat-sdk...'
+  //   'To install `@doc-gpt/chat`...', 
+  //   'To install the @doc-gpt/chat...',
+  //   'To install @doc-gpt/chat...'
   // ]  
     
 } catch (err) {
@@ -179,9 +179,9 @@ try {
 This will setup a default first message sent to the api, with role "system", in order to guide the behaviour of the model.
 _It's possibile to override this in the `options.systemMessage` of each single Chat request_
 ```typescript
-const gpt = new GptChatSDK({
+const gpt = new DocGptChat({
   apiKey: OPENAI_API_KEY,
-  defaultSystemMessage: 'Your name is GptChatSDK. You are a helpful assistant.',
+  defaultSystemMessage: 'Your name is DocGptChat. You are a helpful assistant.',
 });
 // Chat...
 ```
@@ -195,7 +195,7 @@ Default is `gpt-3.5-turbo`, *so if you need that one, you don't need to set this
 _It's possibile to override this in the `options.model` of each single Chat request_
 
 ```typescript
-const gpt = new GptChatSDK({
+const gpt = new DocGptChat({
   apiKey: OPENAI_API_KEY,
   defaultModel: 'gpt-3.5-turbo-0301', // or using the constant, like `GptModels["gpt-3.5-turbo"]`
 });

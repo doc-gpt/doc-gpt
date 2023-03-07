@@ -1,31 +1,31 @@
 {
-  "name": "gpt-chat-sdk",
+  "name": "chat",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/gpt-chat-sdk/src",
+  "sourceRoot": "packages/chat/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/gpt-chat-sdk",
-        "main": "packages/gpt-chat-sdk/src/index.ts",
-        "tsConfig": "packages/gpt-chat-sdk/tsconfig.lib.json",
-        "assets": ["packages/gpt-chat-sdk/*.md"]
+        "outputPath": "dist/packages/chat",
+        "main": "packages/chat/src/index.ts",
+        "tsConfig": "packages/chat/tsconfig.lib.json",
+        "assets": ["packages/chat/*.md"]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/gpt-chat-sdk/**/*.ts"]
+        "lintFilePatterns": ["packages/chat/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/gpt-chat-sdk/jest.config.ts",
+        "jestConfig": "packages/chat/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

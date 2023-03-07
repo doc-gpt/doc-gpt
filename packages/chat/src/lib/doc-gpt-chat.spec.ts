@@ -1,25 +1,25 @@
 import { GptInvalidApiKey, GptMissingOptions } from './messages/errors';
-import GptChatSDK from './gpt-chat-sdk';
+import DocGptChat from './doc-gpt-chat';
 
 describe('GptSDK Class - Bad options', () => {
   it('Initialization without options should throw GptMissingOptions', () => {
     // Simulating pure js situation without typings so we can try pass no options
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(() => new (GptChatSDK as any)()).toThrowError(GptMissingOptions);
+    expect(() => new (DocGptChat as any)()).toThrowError(GptMissingOptions);
   });
 
   it('Initialization with nullish api keys should throw GptInvalidApiKey', () => {
     const errorMessageRegex = new RegExp(`^${GptInvalidApiKey}`);
     expect(
       () =>
-        new GptChatSDK({
+        new DocGptChat({
           apiKey: '',
         })
     ).toThrowError(errorMessageRegex);
 
     expect(
       () =>
-        new GptChatSDK({
+        new DocGptChat({
           // Simulating pure js situation without typings
           apiKey: null as unknown as string, // force nullish value
         })
@@ -27,7 +27,7 @@ describe('GptSDK Class - Bad options', () => {
 
     expect(
       () =>
-        new GptChatSDK({
+        new DocGptChat({
           // Simulating pure js situation without typings
           apiKey: 0 as unknown as string, // force nullish value
         })
@@ -35,7 +35,7 @@ describe('GptSDK Class - Bad options', () => {
 
     expect(
       () =>
-        new GptChatSDK({
+        new DocGptChat({
           // Simulating pure js situation without typings
           apiKey: undefined as unknown as string, // force nullish value
         })
@@ -48,7 +48,7 @@ describe('GptSDK Class - Good options', () => {
     const apiKey = 'sk-fake-api-key';
     expect(
       () =>
-        new GptChatSDK({
+        new DocGptChat({
           apiKey,
         })
     );

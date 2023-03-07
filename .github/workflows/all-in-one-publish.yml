@@ -22,37 +22,32 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npx nx run gpt-chat-sdk:lint
+        run: npx nx run chat:lint
 
       - name: Test
-        run: npx nx run gpt-chat-sdk:test
-
-      - name: Copy README from root to library
-        run: |
-          cd ./packages/gpt-chat-sdk
-          npm run copy_docs_from_root
+        run: npx nx run chat:test
 
       - name: Build
-        run: npx nx build gpt-chat-sdk
+        run: npx nx build chat
 
       - name: Copy DOCS files from root to dist
         run: |
-          cd ./packages/gpt-chat-sdk
+          cd ./packages/chat
           npm run copy_docs_from_root_to_dist
 
       - name: Publish to NPM (if needed)
         run: |
-          cd ./dist/packages/gpt-chat-sdk
+          cd ./dist/packages/chat
           touch .npmrc 
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}">.npmrc
-          npm publish
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}">>.npmrc
+          echo "@doc-gpt:registry=https://registry.npmjs.org/">>.npmrc
+          npm publish --access=public
         continue-on-error: true
 
       - name: Publish to GitHub Packages (if needed)
         run: |
-          cd ./dist/packages/gpt-chat-sdk
-          jq '.name = "@doc-packages/gpt-chat-sdk"' package.json > temp.json
-          mv temp.json package.json
+          cd ./dist/packages/chat
           echo "//npm.pkg.github.com/:_authToken=${{secrets.GH_TOKEN}}" >> .npmrc
+          echo "@doc-gpt:registry=https://npm.pkg.github.com/">>.npmrc
           npm publish --registry=https://npm.pkg.github.com/
         continue-on-error: true

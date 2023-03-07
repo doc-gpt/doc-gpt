@@ -1,10 +1,10 @@
 /* eslint-disable */
 export default {
-  displayName: 'gpt-chat-sdk',
+  displayName: 'chat',
   preset: '../../jest.preset.js',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/gpt-chat-sdk',
+  coverageDirectory: '../../coverage/packages/chat',
 };

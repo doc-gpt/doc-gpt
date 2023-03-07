@@ -1,5 +1,5 @@
 /**
- * The configuration for the GptChatSDK instance.
+ * The configuration for the DocGptChat instance.
  * *If you don't have an OpenAI Api Key, see https://platform.openai.com/account/api-keys to find or create yours*
  *
  * **apiKey**: Your OpenAI api key (required)
@@ -13,7 +13,7 @@ export interface GptSDKOptions {
    * By default it's used `gpt-3.5-turbo`.
    */
   defaultModel?: GptModel;
-  /** 
+  /**
    * Automatically set the first 'system' message sent in the request (if missing)
    * Quoting the OpenAI docs:
    * `the system message helps set the behavior of the assistant`

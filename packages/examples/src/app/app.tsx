@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useCallback, useState } from 'react';
-import GptChatSDK from '@gpt-chat-sdk';
+import DocGptChat from 'chat';
 
 export function App() {
   const [message, setMessage] = useState('Waiting for you');
@@ -10,7 +10,7 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
 
   const generate = useCallback(() => {
-    const gpt = new GptChatSDK({
+    const gpt = new DocGptChat({
       apiKey: apiKey,
       defaultSystemMessage: system,
     });

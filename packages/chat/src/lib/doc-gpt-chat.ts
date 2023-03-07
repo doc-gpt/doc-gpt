@@ -12,7 +12,7 @@ import {
 
 /**
  * --------------------
- * -- GPT SDK --
+ * -- Doc GPT - Chat SDK --
  * --------------------
  * -- Version: 1.0.0 --
  * --------------------
@@ -32,7 +32,7 @@ import {
  *
  * For more informations about the api see [https://platform.openai.com/docs/api-reference/completions](https://platform.openai.com/docs/api-reference/completions)
  */
-class GptChatSDK {
+class DocGptChat {
   /**
    * Instance configuration. (private)
    *
@@ -180,4 +180,4 @@ class GptChatSDK {
   }
 }
 
-export default GptChatSDK;
+export default DocGptChat;
