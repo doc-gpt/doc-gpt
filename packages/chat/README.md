@@ -4,6 +4,8 @@
 
 Use the new **OpenAI Chat Api** `/v1/chat/completion` with ease.
 
+***Stream request are supported***
+
 > Note: _OpenAI Chat Api is still in beta, and may change very quickly_.
 > If you notice some changes in the api that has not been implemented, please open an issue or propose a PR.
 
@@ -15,7 +17,7 @@ The library is avaliable both on [NPM](https://www.npmjs.com/package/doc-gpt/cha
 
 #### Install from NPM
 
-```
+```bash
 npm i @doc-gpt/chat
 ```
 
@@ -23,14 +25,14 @@ npm i @doc-gpt/chat
 
 First of all, you need to add a `.npmrc` file, in the root of your project, with the following content:
 
-```
+```npmrc
 @doc-gpt:registry=https://npm.pkg.github.com
 ```
 
-Then install the package (replace \<VERSION> with the version you need, or latest)
+Then install the package
 
-```
-npm install  @doc-gpt/chat@<VERSION>
+```bash
+npm install  @doc-gpt/chat@1.1.0
 ```
 
 # Getting started
@@ -50,18 +52,44 @@ You just need to configure the instance and start chatting with the methods aval
 import DocGptChat from '@doc-gpt/chat';
 ```
 
+#### Configure the instance
+
+```typescript
+const gpt = new DocGptChat({
+  // Required,
+  apiKey: OPENAI_API_KEY, // If static, it's highly recommended to use environment variable
+  // Optional
+  defaultModel: GptModels['gpt-3.5-turbo-0301'], // (default gpt-3.5-turbo)
+  // Optional
+  defaultSystemMessage: 'You are ChatGPT...',
+});
+```
+
+#### Simple usage example:
+
+If you just need the first message content from the response, it's avaliable the `SimpleChat` method, which wraps `Chat` with the same parameters and returns the first message string.
+
+```typescript
+try {
+  // Get a full response from the api
+  const message = await gpt.SimpleChat([
+    {
+      role: 'user',
+      content: prompt,
+    },
+  ]);
+
+  // Use the message
+} catch (err) {
+  // Handle Api errors
+}
+```
+
 #### Basic usage example:
 
 If you just need the full response from the api, it's avaliable the `Chat` method.
 
 ```typescript
-// Create the DocGptChat instance with just the api key
-const gpt = new DocGptChat({
-  apiKey: OPENAI_API_KEY,
-});
-
-// ...
-
 try {
   // Get a full response from the api
   const res = await gpt.Chat([
@@ -81,62 +109,33 @@ try {
 }
 ```
 
-For the full structure of the response, see the interface `GptResponse`  
-or the response example in the OpenAI docs at: [https://platform.openai.com/docs/api-reference/chat/create](https://platform.openai.com/docs/api-reference/chat/create)
+#### Stream usage example:
 
-#### Simple usage example:
-
-If you just need the first message content from the response, it's avaliable the `SimpleChat` method, which wraps `Chat` with the same parameters and returns the first message string.
+If you want to use stream response, you can use `ChatStream` method.
 
 ```typescript
-// Create the DocGptChat instance with just the api key
-const gpt = new DocGptChat({
-  apiKey: OPENAI_API_KEY,
-});
+// Message to increment
+let message = '';
 
-// ...
-
-try {
-  // Get a full response from the api
-  const message = await gpt.SimpleChat([
+// Get a full response from the api
+gpt
+  .ChatStream([
     {
       role: 'user',
       content: prompt,
     },
-  ]);
-
-  // Use the message
-} catch (err) {
-  // Handle Api errors
-}
-```
-
-#### Setting a default system message:
-
-This will setup a default first message sent to the api, with role "system" in order to guide the behaviour of the model.
-
-```typescript
-const gpt = new DocGptChat({
-  apiKey: OPENAI_API_KEY,
-  defaultSystemMessage: system,
-});
-// Chat...
-```
-
-> Note: This is added as first message only if the `messages` list has no system message
-
-#### Setting a default model:
-
-This will setup a default model to use for the requests.  
-Default is `gpt-3.5-turbo`.
-_It's possibile to override this in the `options` of each single Chat request_
-
-```typescript
-const gpt = new DocGptChat({
-  apiKey: OPENAI_API_KEY,
-  defaultModel: 'gpt-3.5-turbo-0301', // or using the constant, like `GptModels["gpt-3.5-turbo"]`
-});
-// Chat...
+  ])
+  .onMessage((messageDelta, fullResponse) => {
+    // Increment the response message
+    message = message + messageDelta;
+  })
+  .onDone(() => {
+    // Use the full message
+    console.log(message);
+  })
+  .onError((err) => {
+    // Handle errors
+  });
 ```
 
 ## Methods
@@ -195,8 +194,15 @@ interface GptResponse {
 
 // Response Choice
 interface GptResponseChoices {
-  index: number;
   message: GptMessage;
+  index: number;
+  finish_reason: string;
+}
+
+// Response Choice structure with stream mode
+export interface GptResponseStreamChoices {
+  delta: GptMessage; // delta instead of message
+  index: number;
   finish_reason: string;
 }
 
@@ -225,11 +231,23 @@ const model = GptModels['gpt-3.5-turbo-0301'];
 
 ## Dependencies
 
+##### Axios
+
 This library depends on `axios` library.
 
 [See axios-http website](https://axios-http.com/)  
 [See axios on NPM](https://www.npmjs.com/package/axios)  
 [See axios/axios repository](https://github.com/axios/axios)
+
+##### TextLineStream class
+
+This library has copied the class TextLineStream from [denoland/deno_std](https://github.com/denoland/deno_std/blob/main/streams/text_line_stream.ts) (MIT) project.
+
+[See Deno website](https://deno.land/)
+[See denoland/deno_std repository](https://github.com/denoland/deno_std)
+
+
+---
 
 Take a look at the file [THIRD_PARTY_LICENCES](./THIRD_PARTY_LICENCES) for the full licences.
 
