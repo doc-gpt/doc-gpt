@@ -1,4 +1,4 @@
-name: Publish Package
+name: Publish @doc-gpt/chat Package
 
 on:
   push:
