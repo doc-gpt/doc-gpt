@@ -139,10 +139,18 @@ export interface GptResponse {
   usage: GetResponceUsage;
 }
 
+export interface GptStreamResponse extends Omit<GptResponse, 'choices'> {
+  choices: GptResponseStreamChoices[]
+}
+
 export interface GptResponseChoices {
   index: number;
   message: GptMessage;
   finish_reason: string;
+}
+
+export interface GptResponseStreamChoices extends Omit<GptResponseChoices, 'message'> {
+  delta: GptMessage;
 }
 
 export interface GetResponceUsage {
