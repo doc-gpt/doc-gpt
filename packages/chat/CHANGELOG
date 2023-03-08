@@ -1,0 +1,12 @@
+# 1.1.0
+
+- Stream method implemented. Use `ChatStream` method, which offers usefull callbacks to easily consume the response. 
+*See the README for an example.*
+- Refactor README and add ChatStream explanation
+
+# 1.0.0
+
+Add the `DocGptChat` instance with:
+- Chat method for non-stream request
+- SimpleChat method for getting first message content from non-stream request
+- Stream request are still todo

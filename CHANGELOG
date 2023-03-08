@@ -1,6 +1,0 @@
-# 1.0.0
-
-Add the `DocGptChat` instance with:
-- Chat method for non-stream request
-- SimpleChat method for getting first message content from non-stream request
-- Stream request are still todo
