@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "chat": ["packages/chat/src/index.ts"]
+      "chat": ["packages/chat/src/index.ts"],
+      "chat-react": ["packages/chat-react/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

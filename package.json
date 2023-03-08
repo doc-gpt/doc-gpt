@@ -3,20 +3,22 @@
   "version": "1.0.0",
   "license": "GPL",
   "scripts": {
-    "prepublish": "cd ./packages/chat && npm run build",
-    "publish": "npm run prepublish && cd ./dist/packages/chat && npm publish"
+    "build:chat": "cd ./packages/chat && npm run build",
+    "publish": "npm run build:chat && cd ./dist/packages/chat && npm publish"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@nrwl/cypress": "15.8.1",
     "@nrwl/eslint-plugin-nx": "15.8.1",
     "@nrwl/jest": "15.8.1",
-    "@nrwl/js": "15.8.1",
+    "@nrwl/js": "15.8.5",
     "@nrwl/linter": "15.8.1",
     "@nrwl/nx-cloud": "latest",
-    "@nrwl/react": "^15.8.1",
+    "@nrwl/react": "^15.8.5",
     "@nrwl/webpack": "15.8.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@rollup/plugin-url": "^7.0.0",
+    "@svgr/rollup": "^6.1.2",
     "@svgr/webpack": "^6.1.2",
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
