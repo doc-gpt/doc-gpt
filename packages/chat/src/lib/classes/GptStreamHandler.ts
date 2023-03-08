@@ -1,4 +1,4 @@
-import { GptStreamResponse } from "./types";
+import { GptStreamResponse } from "../types";
 
 export class GptStreamHandler {
     private _onMessageDelta?: (firstMessageDelta: string, fullChunk: GptStreamResponse) => void;
