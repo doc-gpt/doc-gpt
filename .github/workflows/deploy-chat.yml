@@ -30,11 +30,6 @@ jobs:
       - name: Build
         run: npx nx build chat
 
-      - name: Copy DOCS files from root to dist
-        run: |
-          cd ./packages/chat
-          npm run copy_docs_from_root_to_dist
-
       - name: Publish to NPM (if needed)
         run: |
           cd ./dist/packages/chat

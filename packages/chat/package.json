@@ -5,7 +5,6 @@
   "private": false,
   "description": "Typed client for interacting with the OpenAI Chat Api",
   "scripts": {
-    "copy_docs_from_root_to_dist": "cp ../../LICENCE ../../dist/packages/chat;cp ../../COPYRIGHT ../../dist/packages/chat;cp ../../THIRD_PARTY_LICENCES ../../dist/packages/chat;",
     "build": "cd ../../ && nx run chat:build; cd packages/chat && npm run copy_docs_from_root_to_dist"
   },
   "type": "commonjs",
