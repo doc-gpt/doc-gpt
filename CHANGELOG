@@ -1,16 +1,3 @@
-# 1.0.3
-
-- Just a version change to run the new pipeline and make the first publish on github packages
-
-# 1.0.2
-
-- Refactor README & package.json
-
-# 1.0.1
-
- - Update repository reference in the package.json
- - Add explicit axios dependency in the package.json so npm show it
-
 # 1.0.0
 
 Add the `DocGptChat` instance with:
