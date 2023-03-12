@@ -1,11 +1,12 @@
 {
   "displayName": "Doc GPT - Chat",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "@doc-gpt/chat",
   "private": false,
   "description": "Typed client for interacting with the OpenAI Chat Api",
   "scripts": {
-    "build": "cd ../../ && nx run chat:build; cd packages/chat && npm run copy_docs_from_root_to_dist"
+    "build": "cd ../../ && nx run chat:build",
+    "test": "cd ../../ && nx run chat:test"
   },
   "type": "commonjs",
   "repository": "https://github.com/doc-gpt/doc-gpt",

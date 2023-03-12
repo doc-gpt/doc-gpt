@@ -32,7 +32,7 @@ First of all, you need to add a `.npmrc` file, in the root of your project, with
 Then install the package
 
 ```bash
-npm install  @doc-gpt/chat@1.1.0
+npm install  @doc-gpt/chat@1.1.1
 ```
 
 # Getting started
@@ -42,7 +42,7 @@ You just need to configure the instance and start chatting with the methods aval
 
 - `Chat(messages, options)`
 - `SimpleChat(messages, options)`
-- Stream version of this methods are still to be done
+- `ChatStream(messages, options, onMessageDelta, onDone, onError)`
 
 > Note: If you use a static api key, it's better to use an environment variable.
 
@@ -59,7 +59,7 @@ const gpt = new DocGptChat({
   // Required,
   apiKey: OPENAI_API_KEY, // If static, it's highly recommended to use environment variable
   // Optional
-  defaultModel: GptModels['gpt-3.5-turbo-0301'], // (default gpt-3.5-turbo)
+  defaultModel: GptModels['gpt-3.5-turbo-0301'], // or simply as string (default gpt-3.5-turbo)
   // Optional
   defaultSystemMessage: 'You are ChatGPT...',
 });

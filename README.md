@@ -12,7 +12,6 @@ Everything started with the new Chat Api Client, but other implementation are on
 
 *Here the actual work in progress*
 - New React Component/Hook library for the Chat client
-- Chat library: stream mode
 
 ## Clients
 
