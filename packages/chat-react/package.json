@@ -1,4 +1,11 @@
 {
   "name": "@doc-gpt/chat-react",
-  "version": "1.0.0"
+  "displayName": "Doc GPT - Chat React",
+  "version": "1.1.0",
+  "private": false,
+  "license": "GPL",
+  "description": "React library to interact with OpenAI Chat Api",
+  "dependencies": {
+    "@doc-gpt/chat": "^1.1.0"
+  }
 }
