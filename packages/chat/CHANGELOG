@@ -1,3 +1,9 @@
+# 1.1.3
+- Add `lastChunk` param in onDone callback for ChatStream  method
+
+# 1.1.1
+- Fix stream explicit import causing problem on some environments
+
 # 1.1.0
 
 - Stream method implemented. Use `ChatStream` method, which offers usefull callbacks to easily consume the response. 

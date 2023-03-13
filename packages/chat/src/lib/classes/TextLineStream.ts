@@ -1,7 +1,5 @@
 // Copyright 2018-2023 the Deno authors. All rights reserved. MIT license.
 
-import { TransformStream } from "stream/web";
-
 interface TextLineStreamOptions {
     /** Allow splitting by solo \r */
     allowCR: boolean;

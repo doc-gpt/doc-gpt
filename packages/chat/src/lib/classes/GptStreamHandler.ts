@@ -3,7 +3,7 @@ import { GptStreamResponse } from "../types";
 export class GptStreamHandler {
     private _onMessageDelta?: (firstMessageDelta: string, fullChunk: GptStreamResponse) => void;
     private _onError?: (err: string | Error) => void;
-    private _onDone?: (stop_reason: string) => void;
+    private _onDone?: (stop_reason: string, lastChunk: GptStreamResponse) => void;
 
     public onMessage(callback: (firstMessageDelta: string, fullChunk: GptStreamResponse) => void): GptStreamHandler {
         this._onMessageDelta = callback;
@@ -15,7 +15,7 @@ export class GptStreamHandler {
         return this;
     }
 
-    public onDone(callback: (stop_reason: string) => void): GptStreamHandler {
+    public onDone(callback: (stop_reason: string, lastChunk: GptStreamResponse) => void): GptStreamHandler {
         this._onDone = callback;
         return this;
     }
@@ -31,8 +31,8 @@ export class GptStreamHandler {
     }
 
     /** Internal. Do not use this */
-    _notifyDone(stop_reason: string) {
-        if (this._onDone) this._onDone(stop_reason);
+    _notifyDone(stop_reason: string, lastChunk: GptStreamResponse) {
+        if (this._onDone) this._onDone(stop_reason, lastChunk);
     }
 
 }

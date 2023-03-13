@@ -160,7 +160,7 @@ export class DocGptChat {
     messages: GptMessage[],
     options?: GptChatOptions,
     onMessageDelta?: (firstMessageDelta: string, fullChunk: GptStreamResponse) => void,
-    onDone?: (stop_reason: string) => void,
+    onDone?: (stop_reason: string, lastChunk: GptStreamResponse) => void,
     onError?: (err: string | Error) => void,
   ): GptStreamHandler {
     const body: Partial<GptChatRequest> | GptChatRequest = {
@@ -238,12 +238,12 @@ export class DocGptChat {
         }
 
         for await (const json of readStreamAsEvents(res.body as ReadableStream<Uint8Array>)) {
-          console.log(json)
+          // console.log(json)
           const { delta, finish_reason } = json.choices[0];
           const { content } = delta;
           if (finish_reason) {
-            if (onDone) onDone(finish_reason)
-            gptStreamHandler._notifyDone(finish_reason)
+            if (onDone) onDone(finish_reason, json)
+            gptStreamHandler._notifyDone(finish_reason, json)
             break;
           }
           if (content) {
