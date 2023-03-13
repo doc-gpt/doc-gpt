@@ -32,7 +32,7 @@ First of all, you need to add a `.npmrc` file, in the root of your project, with
 Then install the package
 
 ```bash
-npm install  @doc-gpt/chat@1.1.1
+npm install  @doc-gpt/chat@1.1.2
 ```
 
 # Getting started
