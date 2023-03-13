@@ -243,8 +243,8 @@ This library depends on `axios` library.
 
 This library has copied the class TextLineStream from [denoland/deno_std](https://github.com/denoland/deno_std/blob/main/streams/text_line_stream.ts) (MIT) project.
 
-[See Deno website](https://deno.land/)
-[See denoland/deno_std repository](https://github.com/denoland/deno_std)
+[See Deno website](https://deno.land/)  
+[See denoland/deno_std repository](https://github.com/denoland/deno_std)  
 
 
 ---

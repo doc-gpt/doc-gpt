@@ -1,6 +1,16 @@
 import { GptInvalidApiKey, GptMissingOptions } from './messages/errors';
 import DocGptChat from './doc-gpt-chat';
 
+let TransformedStream;
+
+if (typeof window === 'undefined') {
+  // Se il test viene eseguito in ambiente Node.js, importa TransformedStream
+  TransformedStream = import('stream/web').then(m => m.TransformStream);
+} else {
+  // Altrimenti, definisci una classe vuota al posto di TransformedStream
+  TransformedStream = class {};
+}
+
 describe('GptSDK Class - Bad options', () => {
   it('Initialization without options should throw GptMissingOptions', () => {
     // Simulating pure js situation without typings so we can try pass no options
