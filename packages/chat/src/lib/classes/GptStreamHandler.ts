@@ -15,7 +15,7 @@ export class GptStreamHandler {
         return this;
     }
 
-    public onDone(callback: (stop_reason: string) => void): GptStreamHandler {
+    public onDone(callback: (stop_reason: string, lastChunk: GptStreamResponse) => void): GptStreamHandler {
         this._onDone = callback;
         return this;
     }

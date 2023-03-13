@@ -1,4 +1,4 @@
-# 1.1.2
+# 1.1.3
 - Add `lastChunk` param in onDone callback for ChatStream  method
 
 # 1.1.1
