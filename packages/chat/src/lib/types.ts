@@ -170,6 +170,20 @@ export type GptModel = 'gpt-3.5-turbo' | 'gpt-3.5-turbo-0301' | string;
  * Map of supported models for the api
  */
 export const GptModels = {
+  //
+  // GPT 3.5
+  /** Latest iteration of gpt-3.5-turbo */
   'gpt-3.5-turbo': 'gpt-3.5-turbo' as GptModel,
+  /** gpt-3.5-turbo-0301 */
   'gpt-3.5-turbo-0301': 'gpt-3.5-turbo-0301' as GptModel,
+  //
+  // GPT 4.0 (LIMITED BETA)
+  /** Latest iteration of gpt-4 (8192 max tokens) (LIMITED BETA - Be sure you are enabled) */
+  'gpt-4': 'gpt-4'  as GptModel,
+  /** gpt-4-0314 (8192 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-0314': 'gpt-4-0314'  as GptModel,
+  /** Latest iteration of gpt-4-32k (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-32k': 'gpt-4-32k'  as GptModel,
+  /** gpt-4-32k-0314 (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-32k-0314': 'gpt-4-32k-0314'  as GptModel,
 };
