@@ -5,9 +5,6 @@ if (typeof TransformStream === 'undefined') {
     // Altrimenti, definisci una classe vuota al posto di TransformedStream
     class FakeStream<A,B>{ }
     TransformedStream = FakeStream as unknown as any;
-} else if (typeof window === 'undefined') {
-    // Se il test viene eseguito in ambiente Node.js, importa TransformedStream
-    TransformedStream = import('stream/web').then(m => m.TransformStream);
 } else {
     TransformedStream = TransformStream as unknown as any;
 }
