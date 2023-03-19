@@ -1,6 +1,6 @@
 {
   "displayName": "Doc GPT - Chat",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "name": "@doc-gpt/chat",
   "private": false,
   "description": "Typed client for interacting with the OpenAI Chat Api",

@@ -1,4 +1,4 @@
-# 1.1.4
+# 1.1.5
 - Add fake polyfill to solve build problems with TransformedStream
 
 # 1.1.3
