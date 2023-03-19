@@ -327,7 +327,7 @@ async function* readStreamAsEvents(stream: ReadableStream<Uint8Array>): AsyncGen
 async function* readStreamAsTextLines(stream: ReadableStream<Uint8Array>): AsyncGenerator<string> {
   const linesReader = stream
     .pipeThrough(new TextDecoderStream())
-    .pipeThrough(new TextLineStream() as ReadableWritablePair<string | undefined, string>)
+    .pipeThrough(new TextLineStream() as unknown as ReadableWritablePair<string | undefined, string>)
     .getReader();
   while (true) {
     const { value, done } = await linesReader.read();
