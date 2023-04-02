@@ -161,29 +161,39 @@ export interface GetResponceUsage {
 
 export type GptRole = 'system' | 'user' | 'assistant';
 
-/**
- * Supported models for the api (with support for any string in case of last-moment new models you may want to try)
- */
-export type GptModel = 'gpt-3.5-turbo' | 'gpt-3.5-turbo-0301' | string;
 
 /**
  * Map of supported models for the api
  */
-export const GptModels = {
+const _GptModels = {
   //
   // GPT 3.5
   /** Latest iteration of gpt-3.5-turbo */
-  'gpt-3.5-turbo': 'gpt-3.5-turbo' as GptModel,
+  'gpt-3.5-turbo': 'gpt-3.5-turbo',
   /** gpt-3.5-turbo-0301 */
-  'gpt-3.5-turbo-0301': 'gpt-3.5-turbo-0301' as GptModel,
+  'gpt-3.5-turbo-0301': 'gpt-3.5-turbo-0301',
   //
   // GPT 4.0 (LIMITED BETA)
   /** Latest iteration of gpt-4 (8192 max tokens) (LIMITED BETA - Be sure you are enabled) */
-  'gpt-4': 'gpt-4'  as GptModel,
+  'gpt-4': 'gpt-4',
   /** gpt-4-0314 (8192 max tokens) (LIMITED BETA - Be sure you are enabled)*/
-  'gpt-4-0314': 'gpt-4-0314'  as GptModel,
+  'gpt-4-0314': 'gpt-4-0314',
   /** Latest iteration of gpt-4-32k (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
-  'gpt-4-32k': 'gpt-4-32k'  as GptModel,
+  'gpt-4-32k': 'gpt-4-32k',
   /** gpt-4-32k-0314 (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
-  'gpt-4-32k-0314': 'gpt-4-32k-0314'  as GptModel,
+  'gpt-4-32k-0314': 'gpt-4-32k-0314',
 };
+
+export const GptModels = _GptModels as {
+  'gpt-3.5-turbo': GptModel,
+  'gpt-3.5-turbo-0301': GptModel,
+  'gpt-4': GptModel,
+  'gpt-4-0314': GptModel,
+  'gpt-4-32k': GptModel,
+  'gpt-4-32k-0314': GptModel,
+}
+
+/**
+ * Supported models for the api (with support for any string in case of last-moment new models you may want to try)
+ */
+export type GptModel = keyof typeof GptModels;
