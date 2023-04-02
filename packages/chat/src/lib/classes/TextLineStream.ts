@@ -1,5 +1,15 @@
 // Copyright 2018-2023 the Deno authors. All rights reserved. MIT license.
 
+let TransformedStream;
+if (typeof TransformStream === 'undefined') {
+    // Altrimenti, definisci una classe vuota al posto di TransformedStream
+    class FakeStream<A,B>{ }
+    TransformedStream = FakeStream as unknown as any;
+} else {
+    TransformedStream = TransformStream as unknown as any;
+}
+
+
 interface TextLineStreamOptions {
     /** Allow splitting by solo \r */
     allowCR: boolean;
@@ -16,14 +26,14 @@ interface TextLineStreamOptions {
  *   .pipeThrough(new TextLineStream());
  * ```
  */
-export class TextLineStream extends TransformStream<string, string> {
+export class TextLineStream extends TransformedStream<string, string> {
     readonly #allowCR: boolean;
     #buf = "";
 
     constructor(options?: TextLineStreamOptions) {
         super({
-            transform: (chunk, controller) => this.#handle(chunk, controller),
-            flush: (controller) => {
+            transform: (chunk: any, controller: any) => this.#handle(chunk, controller),
+            flush: (controller: any) => {
                 if (this.#buf.length > 0) {
                     if (
                         this.#allowCR &&
