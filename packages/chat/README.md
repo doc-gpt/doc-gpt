@@ -220,13 +220,25 @@ There is a const named `GptModels` you can import in order to refer to avaliable
 _If a new model is release, and you want to try it, you can still pass any string to `model` option_.
 
 ```ts
-export const GptModels = {
-  'gpt-3.5-turbo': 'gpt-3.5-turbo' as GptModel,
-  'gpt-3.5-turbo-0301': 'gpt-3.5-turbo-0301' as GptModel,
+const GptModels = {
+  // GPT 3.5
+  /** Latest iteration of gpt-3.5-turbo */
+  'gpt-3.5-turbo': 'gpt-3.5-turbo',
+  /** gpt-3.5-turbo-0301 */
+  'gpt-3.5-turbo-0301': 'gpt-3.5-turbo-0301',
+  // GPT 4.0 (LIMITED BETA)
+  /** Latest iteration of gpt-4 (8192 max tokens) (LIMITED BETA - Be sure you are enabled) */
+  'gpt-4': 'gpt-4',
+  /** gpt-4-0314 (8192 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-0314': 'gpt-4-0314',
+  /** Latest iteration of gpt-4-32k (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-32k': 'gpt-4-32k',
+  /** gpt-4-32k-0314 (32,768 max tokens) (LIMITED BETA - Be sure you are enabled)*/
+  'gpt-4-32k-0314': 'gpt-4-32k-0314',
 };
 
 // Example
-const model = GptModels['gpt-3.5-turbo-0301'];
+const model = GptModels['gpt-4-32k'];
 ```
 
 ## Dependencies
